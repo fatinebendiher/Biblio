@@ -12,7 +12,7 @@ class Livre
         string $titre,
         string $auteur
     ) {
-        
+        // L'ISBN doit contenir exactement 10 ou 13 chiffres
         if (!preg_match('/^\d{10}$|^\d{13}$/', $isbn)) {
             throw new InvalidArgumentException(
                 "L'ISBN doit contenir 10 ou 13 chiffres."
@@ -24,7 +24,8 @@ class Livre
         $this->auteur = $auteur;
         $this->disponible = true;
     }
-     public function getIsbn(): string
+
+    public function getIsbn(): string
     {
         return $this->isbn;
     }
@@ -43,6 +44,7 @@ class Livre
     {
         return $this->disponible;
     }
+
     public function emprunter(): void
     {
         if (!$this->disponible) {
@@ -59,5 +61,13 @@ class Livre
         }
 
         $this->disponible = true;
+    }
+
+    public function __toString(): string
+    {
+        $etat = $this->disponible ? "Disponible" : "Emprunté";
+
+        return $this->titre . " - " . $this->auteur .
+               " (ISBN : " . $this->isbn . ") - " . $etat;
     }
 }
