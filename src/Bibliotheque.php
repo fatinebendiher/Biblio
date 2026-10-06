@@ -3,7 +3,7 @@ class Bibliotheque
 {
     /** @var Livre[] livres indexés par ISBN */
     private array $livres = [];
-
+       /** Ajoute un livre ; lève une Exception si l'ISBN existe déjà. */
     public function ajouter(Livre $l): void
     {
         if (isset($this->livres[$l->getIsbn()])) {
