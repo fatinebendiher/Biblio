@@ -29,4 +29,19 @@ class Membre
         $livre->emprunter();
         $this->emprunts[] = $livre;
     }
+
+        public function rendre(Livre $livre): void
+    {
+        $index = array_search($livre, $this->emprunts, true);
+        if ($index === false) {
+            throw new Exception("Ce livre n'est pas emprunté par ce membre");
+        }
+        $livre->rendre();
+        array_splice($this->emprunts, $index, 1);
+    }
+
+    public function getEmprunts(): array
+    {
+        return $this->emprunts;
+    }
 }
