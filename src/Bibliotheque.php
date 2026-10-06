@@ -11,4 +11,18 @@ class Bibliotheque
         }
         $this->livres[$l->getIsbn()] = $l;
     }
+        public function trouver(string $isbn): ?Livre
+    {
+        return $this->livres[$isbn] ?? null;
+    }
+
+    public function tous(): array
+    {
+        return array_values($this->livres);
+    }
+
+    public function compter(): int
+    {
+        return count($this->livres);
+    }
 }
